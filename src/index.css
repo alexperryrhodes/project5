@@ -36,3 +36,23 @@ h1 {
   line-height: 1.1;
 }
 
+.statGroup {
+  display: flex;
+  
+  width: 450px;
+}
+
+.stat { 
+  border: solid;
+  border-color: white;
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  display: grid;
+}
+
+.weather-table { 
+  width: 450px;
+  border: solid;
+  border-color: white;
+}
