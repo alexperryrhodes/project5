@@ -14,8 +14,8 @@ The following **required** functionality is completed:
 - [x] **Data uses the useEffect React hook and async/await syntax**
 - [x] **The app dashboard includes at least three summary statistics about the data such as**
   - [x] *Average Temperature*
-  - [ ] *Average Percipitation*
-  - [ ] *Average UV*
+  - [x] *Average Percipitation*
+  - [x] *Average UV*
 - [x] **A search bar allows the user to search for an item in the fetched data**
 - [ ] **Multiple different filters (2+) allow the user to filter items in the database by specified categories**
 
@@ -33,14 +33,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-
-
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+![Alt Text](https://github.com/alexperryrhodes/project5/blob/main/gif.gif)
 
 ## Notes
 
