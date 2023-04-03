@@ -102,3 +102,14 @@ h1 {
 .weather-table thead {
   font-weight: bolder;
 }
+
+.home-link 
+{
+  border:1px dotted white;
+  background:#1d1f1d;
+  width:75px;
+  list-style-type: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
