@@ -2,75 +2,115 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import WeatherTable from "./components/WeatherTable";
 import WeatherStat from "./components/WeatherStat";
+import { fetchWeatherData } from "./api";
+import WeatherChart from "./components/WeatherChart";
 
 function App() {
   const [weather, setWeather] = useState(null);
+  const [date, setDate] = useState("2023-04-01");
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    const fetchWeatherData = async () => {
-      const response = await fetch(
-        "http://api.weatherapi.com/v1/history.json?key=2436f386044444adac815931221804&q=Cupertino&dt=2023-03-28"
-      );
-      const json = await response.json();
-      const day = json.forecast.forecastday[0].hour;
-      setWeather(day);
+    async function startFetching() {
+      setWeather(null);
+      //console.log('date oj',date)
+      const result = await fetchWeatherData(date);
+      if (!ignore) {
+        const day = formatJSON(result);
+        setWeather(day);
+      }
+    }
+    let ignore = false;
+    startFetching();
+    return () => {
+      ignore = true;
     };
-    fetchWeatherData().catch(console.error);
-  }, []);
+  }, [date]);
 
-  const timeList = [];
-  const tempList = [];
-  const precipList = [];
-  const uvList = [];
-  const formattedJSON = {};
+  //console.log("weather:", weather);
 
   const formatJSON = (json) => {
-    json &&
-      json.forEach((item) => {
-        timeList.push(item.time);
-        tempList.push(item.temp_f);
-        precipList.push(item.precip_in);
-        uvList.push(item.uv);
-        formattedJSON[item.time] = [item.temp_f, item.precip_in, item.uv];
-      });
+    //console.log("json:", json);
+    const hour = json && json.forecast.forecastday[0].hour;
+    const formattedJSON = [];
+
+    //console.log("hour:", hour);
+
+    hour.forEach((item) => {
+      const dict = {};
+      const date = new Date(item.time);
+      const options = { hour: "numeric", minute: "numeric" };
+
+      dict["hour"] = date.toLocaleTimeString("en-US", options);
+      dict["Temperature"] = item.temp_f;
+      dict["Precipitation"] = item.precip_in;
+      dict["UV"] = item.uv;
+      //console.log('dict', dict)
+      formattedJSON.push(dict);
+    });
+
+    //console.log("formattedJSON:", formattedJSON);
+    return formattedJSON;
   };
 
   const searchItems = (searchValue) => {
     setSearchInput(searchValue);
-
-    if (searchValue !== "") {
-      let filteredData = formattedJSON[searchValue]
-      filteredData = [searchValue, ...filteredData]
-      setFilteredResults(filteredData);
-    } else {
-      setFilteredResults(Object.keys(formattedJSON));
-    }
+    let filteredWeather = weather.filter(function (weatherItem) {
+      return weatherItem.hour.startsWith(searchValue);
+    });
+    //console.log("filt w:", filteredWeather);
+    setFilteredResults(filteredWeather);
   };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    //console.log('test');
+    //console.log('date oj2', date)
+  }
 
   return (
     <div className="App">
-      <h1>Weather</h1>
+      <h1>Hourly Weather</h1>
 
-      <input
-        type="text"
-        placeholder="Search..."
-        onChange={(inputString) => searchItems(inputString.target.value)}
-      />
+      <div className="dateArea">
+        <form onSubmit={handleSubmit}>
+          <label>Pick Date:</label>
+          <input
+            className="Date"
+            type="text"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+      <div className="searchArea">
+        <p>Search by Hour:</p>
+        <input
+          className="searchInput"
+          type="text"
+          placeholder="Search..."
+          onChange={(inputString) => searchItems(inputString.target.value)}
+        />
+      </div>
 
       <div className="statGroup">
-      <WeatherStat weatherArray={tempList} stat="Temperature"/>
-      <WeatherStat weatherArray={precipList} stat="Precipitation"/>
-        <WeatherStat weatherArray={uvList} stat="UV"/>
-        </div>
-      {searchInput.length > 0 ? (
-        <WeatherTable weather={filteredResults} type="filtered"/>
-      ) : (
-        <WeatherTable weather={weather} type="raw"/>
-      )}
+        <WeatherStat weatherJSON={weather} stat="Temperature" />
+        <WeatherStat weatherJSON={weather} stat="Precipitation" />
+        <WeatherStat weatherJSON={weather} stat="UV" />
+      </div>
 
-      {formatJSON(weather)}
+      <div className="weatherData">
+        {searchInput.length > 0 ? (
+          <WeatherTable weatherJSON={filteredResults} />
+        ) : (
+          <WeatherTable weatherJSON={weather} />
+        )}
+
+        <WeatherChart weatherJSON={weather} />
+      </div>
     </div>
   );
 }
