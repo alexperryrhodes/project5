@@ -1,15 +1,16 @@
-# Web Development Project 5 - *Weather App*
+# Web Development Project 5 & 6 - *Weather App*
 
 Submitted by: **Alexandra Rhodese**
 
 This web app: **A weather app which uses an API to return weather data with summary statistics and search capabilities**
 
-Time spent: **6** hours spent in total
+Time spent: **10** hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
+Project 5
 - [x] **The list displays a list of data fetched using an API call**
 - [x] **Data uses the useEffect React hook and async/await syntax**
 - [x] **The app dashboard includes at least three summary statistics about the data such as**
@@ -18,16 +19,20 @@ The following **required** functionality is completed:
   - [x] *Average UV*
 - [x] **A search bar allows the user to search for an item in the fetched data**
 - [ ] **Multiple different filters (2+) allow the user to filter items in the database by specified categories**
+Project 6
+- [x] **The app includes at least one unique chart developed using the fetched data that tell an interesting story**
+- [x] **Clicking on an item in the list view displays more details about it**
+- [x] **Clicking on an item has a direct, unique link to that item's detail view page**
 
 The following **optional** features are implemented:
 
+Project 5
 - [ ] Multiple filters can be applied simultaneously
 - [ ] Filters use different input types such as a text input, a selection, or a slider
 - [ ] The user can enter specific bounds for filter values
-
-The following **additional** features are implemented:
-
-* [ ] List anything else that you added to improve the site's functionality!
+Project 6
+- [ ] The site's customized dashboard contains more content that explains what is interesting about the data
+- [ ] The site allows users to toggle between different data visualizations
 
 ## Video Walkthrough
 
@@ -35,11 +40,6 @@ Here's a walkthrough of implemented user stories:
 
 ![Alt Text](https://github.com/alexperryrhodes/project5/blob/main/gif.gif)
 
-## Notes
-
-I found this project extemely challenging and big leap from previous projects. 
-I do not feel the class covered material well enough to be able to implement these features. 
-It felt like a very frustrating, dishearting project. 
 
 ## License
 
