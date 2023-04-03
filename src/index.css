@@ -12,6 +12,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --width: 550px;
 }
 
 a {
@@ -38,21 +40,65 @@ h1 {
 
 .statGroup {
   display: flex;
-  
-  width: 450px;
+  width: var(--width * 2);
+  justify-content: space-around;
 }
 
 .stat { 
   border: solid;
   border-color: white;
-  width: 100px;
-  height: 100px;
+  height: 200px;
   margin: 20px;
   display: grid;
+  width: var(--width);
+}
+
+.statName {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-flow: column nowrap;
+  margin-top: 20px;
+}
+
+.statName p {
+  margin-top: 5px;
+  font-weight: bolder;
 }
 
 .weather-table { 
-  width: 450px;
+  display: flex;
+  width: var(--width);
   border: solid;
   border-color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-table tr, td {
+  display: flex;
+  width: var(--width);
+  justify-content: space-around;
+}
+
+.searchArea {
+  display: flex;
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchInput {
+  margin-left: 50px;
+  width: 200px;
+  height: 25px;
+}
+
+.weatherData {
+  display: flex;
+  justify-content: space-between;
+}
+
+.weather-table thead {
+  font-weight: bolder;
 }
