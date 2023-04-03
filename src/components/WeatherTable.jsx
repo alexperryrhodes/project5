@@ -1,26 +1,18 @@
 import React from "react";
-import { useState, useEffect } from "react";
 
-function WeatherTable({ weather, type }) {
+function WeatherTable({ weatherJSON }) {
 
   const listItems =
-    type == "raw" ?
-    weather &&
-      weather.map((d) => (
-        <tr key={d.time}>
-          <td>{d.time}</td>
-          <td>{d.temp_f}° F</td>
-          <td>{d.precip_in}</td>
-          <td>{d.uv}</td>
+    weatherJSON &&
+      weatherJSON.map((d) => (
+        <tr key={d.hour}>
+          <td>{d.hour}</td>
+          <td>{d.Temperature}° F</td>
+          <td>{d.Precipitation}</td>
+          <td>{d.UV}</td>
+          <td>Link</td>
         </tr>
-      )) :
-      weather &&
-      <tr>
-          <td>{weather[0]}</td>
-          <td>{weather[1]}° F</td>
-          <td>{weather[2]}</td>
-          <td>{weather[3]}</td>
-        </tr>
+      ))
   
 
   return (
@@ -32,6 +24,7 @@ function WeatherTable({ weather, type }) {
             <td>Temperature</td>
             <td>Precipitation</td>
             <td>UV</td>
+            <td>Link</td>
           </tr>
         </thead>
         <tbody>{listItems}</tbody>
