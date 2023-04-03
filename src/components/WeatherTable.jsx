@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function WeatherTable({ weatherJSON }) {
 
@@ -10,11 +11,10 @@ function WeatherTable({ weatherJSON }) {
           <td>{d.Temperature}° F</td>
           <td>{d.Precipitation}</td>
           <td>{d.UV}</td>
-          <td>Link</td>
+          <td><Link to={d.hour}>Click</Link></td>
         </tr>
       ))
   
-
   return (
     <div className="weather-table">
       <table>
@@ -24,7 +24,7 @@ function WeatherTable({ weatherJSON }) {
             <td>Temperature</td>
             <td>Precipitation</td>
             <td>UV</td>
-            <td>Link</td>
+            <td>Details</td>
           </tr>
         </thead>
         <tbody>{listItems}</tbody>
